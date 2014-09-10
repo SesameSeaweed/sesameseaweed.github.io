@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-10T14:19:01-04:00</updated>
+  <updated>2014-09-10T15:23:17-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Two Sum]]></title>
+    <link href="http://SesameSeaweed.github.io/blog/2014/09/10/two-sum/"/>
+    <updated>2014-09-10T15:10:11-04:00</updated>
+    <id>http://SesameSeaweed.github.io/blog/2014/09/10/two-sum</id>
+    <content type="html"><![CDATA[<p>Given an array of integers, find two numbers such that they add up to a specific target number.
+<a href="https://oj.leetcode.com/problems/two-sum/">https://oj.leetcode.com/problems/two-sum/</a></p>
+
+<p>排序或者查找的变形。题目中指出只有一组正解。利用HashMap，依次扫描。
+对于每一个数 numbers[i]，先判断target - numbers[i] 是否已经在HashMap里面。
+    如果在，就返回map.get(target - numbers[i]) + 1 和 i + 1;
+    如果不在， 把数组中每个数作为Key，对应的下标作为value。</p>
+
+<p>本题关键在于HashMap的设计。要方便查找一个期望值(target - numbers[i])已经被扫描过了，而且希望在O(1)的时间内得到本数的下标。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class TwoSum {
+</span><span class='line'>  public static int[] twoSum(int[] numbers, int target) {
+</span><span class='line'>      HashMap&lt;Integer, Integer> map = new HashMap&lt;Integer, Integer>();
+</span><span class='line'>      int count = numbers.length;
+</span><span class='line'>      int[] result = new int[2];
+</span><span class='line'>      for (int i = 0; i &lt; count; i++) {
+</span><span class='line'>          if (map.containsKey(target - numbers[i])) {
+</span><span class='line'>              result[0] = map.get(target - numbers[i]) + 1;
+</span><span class='line'>              result[1] = i + 1;
+</span><span class='line'>              break;
+</span><span class='line'>          } else {
+</span><span class='line'>              map.put(numbers[i], i);
+</span><span class='line'>          }
+</span><span class='line'>      }
+</span><span class='line'>      return result;
+</span><span class='line'>  }</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
