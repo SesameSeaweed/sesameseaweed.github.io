@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-10T14:09:37-04:00</updated>
+  <updated>2014-09-10T14:19:01-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -18,7 +18,19 @@
     <link href="http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress/"/>
     <updated>2014-09-10T14:01:34-04:00</updated>
     <id>http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This is my first blog in Octopress.</p>
+
+<p>The biggest problem when I tried to deploy Octopress</p>
+
+<p>rake deploy</p>
+
+<p>error: failed to push some refs to &lsquo;git@github.com:SesameSeaweed/sesameseaweed.github.io.git&rsquo;
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
+
+<p>I resolved my issue using this blog:
+<a href="http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/">http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/</a></p>
 ]]></content>
   </entry>
   
