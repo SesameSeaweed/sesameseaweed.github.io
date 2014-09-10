@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-10T12:49:17-04:00</updated>
+  <updated>2014-09-10T14:09:37-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[SesameSeaweed]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[2014-09-10-Hello Octopress]]></title>
-    <link href="http://SesameSeaweed.github.io/blog/2014/09/10/2014-09-10-hello-octopress/"/>
-    <updated>2014-09-10T12:48:44-04:00</updated>
-    <id>http://SesameSeaweed.github.io/blog/2014/09/10/2014-09-10-hello-octopress</id>
+    <title type="html"><![CDATA[Hello Octopress]]></title>
+    <link href="http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress/"/>
+    <updated>2014-09-10T14:01:34-04:00</updated>
+    <id>http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
