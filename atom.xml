@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-11T12:08:28-04:00</updated>
+  <updated>2014-09-11T13:35:24-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Two Sum]]></title>
-    <link href="http://SesameSeaweed.github.io/blog/2014/09/10/two-sum/"/>
+    <link href="http://SesameSeaweed.github.io/blog/two-sum.html/"/>
     <updated>2014-09-10T15:10:11-04:00</updated>
-    <id>http://SesameSeaweed.github.io/blog/2014/09/10/two-sum</id>
+    <id>http://SesameSeaweed.github.io/blog/two-sum</id>
     <content type="html"><![CDATA[<p>Given an array of integers, find two numbers such that they add up to a specific target number.
 <a href="https://oj.leetcode.com/problems/two-sum/">https://oj.leetcode.com/problems/two-sum/</a></p>
 
@@ -66,9 +66,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
-    <link href="http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress/"/>
+    <link href="http://SesameSeaweed.github.io/blog/hello-octopress.html/"/>
     <updated>2014-09-10T14:01:34-04:00</updated>
-    <id>http://SesameSeaweed.github.io/blog/2014/09/10/hello-octopress</id>
+    <id>http://SesameSeaweed.github.io/blog/hello-octopress</id>
     <content type="html"><![CDATA[<p>This is my first blog in Octopress.</p>
 
 <p>The biggest problem when I tried to deploy Octopress</p>
