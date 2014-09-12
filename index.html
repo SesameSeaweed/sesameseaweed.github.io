@@ -9,7 +9,7 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="感觉类似字符数组找最长不重复子序列，字符数组是否有重复字符出现，字符数组删除重复类型题目都是要维护一张表，类似HashTable。 这道题遇到的时候想很多情况。越想越觉得复杂，边角太多。于是大概看了一下别人的思路。网上解法都是维护一张表，但是表的设计各有不同。 我的解法是 维护一张表table， &hellip;">
+  <meta name="description" content="这题在LeetCode上的AC Rate也只有17.5%。也属于corner tests神多的题目。一看到这种题目就头超大&hellip; 因为之前刷leetcode的时候也有做过这题，是看了discussion board上面一个根据找第K小的题目改编来的。舍弃前k个数和后k个数。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,126 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/median-of-two-sorted-arrays.html/">Median of Two Sorted Arrays</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-12T15:29:32-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:29 pm</span></time>
+        
+           | <a href="/blog/median-of-two-sorted-arrays.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/median-of-two-sorted-arrays.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这题在LeetCode上的AC Rate也只有17.5%。也属于corner tests神多的题目。一看到这种题目就头超大&hellip;</p>
+
+<p>因为之前刷leetcode的时候也有做过这题，是看了discussion board上面一个根据找第K小的题目改编来的。舍弃前k个数和后k个数。这个做法这次没有实现。觉得很麻烦。一个巨好巨神的分析：<a href="http://leetcode.com/2011/03/median-of-two-sorted-arrays.html">http://leetcode.com/2011/03/median-of-two-sorted-arrays.html</a>
+印象中上次做题的时候就没有注意到
+1. 在divide成子问题的时候，两个Array抛掉的都是数组长度的一半，这样就破坏了题目本身找median
+2. 当另一个数组是偶数长度的时候，除去中点，中点旁边的那一个元素也不能舍弃。</p>
+
+<p>这次的思路是参考了<a href="http://www.acmerblog.com/leetcode-median-of-two-sorted-arrays-5330.html">http://www.acmerblog.com/leetcode-median-of-two-sorted-arrays-5330.html</a>
+两个数组，分别遍历，取小的，直到到达median。还有就是判断数组长度是不是偶数(median &amp; 1) == 0。感觉位运算有时候特别简洁，但是实在是不怎么熟。
+这个人的代码也感觉很简洁的说。学渣也只有膜拜学习了。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">findMedianSortedArrays</span><span class="o">(</span><span class="kt">int</span> <span class="n">A</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">B</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">median</span> <span class="o">=</span> <span class="o">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="o">);</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="kt">double</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">double</span> <span class="n">post</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">median</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">m</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">m</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>              <span class="k">else</span> <span class="k">return</span> <span class="n">B</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="k">while</span><span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="n">median</span> <span class="o">/</span> <span class="mi">2</span><span class="o">){</span>
+</span><span class='line'>              <span class="n">prev</span> <span class="o">=</span> <span class="n">post</span><span class="o">;</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">post</span> <span class="o">=</span> <span class="n">B</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span><span class='line'>                  <span class="n">j</span><span class="o">++;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">post</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class='line'>                  <span class="n">i</span><span class="o">++;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">B</span><span class="o">[</span><span class="n">j</span><span class="o">]){</span>
+</span><span class='line'>                  <span class="n">post</span> <span class="o">=</span> <span class="n">B</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span><span class='line'>                  <span class="n">j</span><span class="o">++;</span>
+</span><span class='line'>              <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span><span class='line'>                  <span class="n">post</span> <span class="o">=</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class='line'>                  <span class="n">i</span><span class="o">++;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">((</span><span class="n">median</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="o">(</span><span class="n">prev</span> <span class="o">+</span> <span class="n">post</span><span class="o">)</span> <span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">else</span> <span class="k">return</span> <span class="n">post</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -301,13 +421,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (2)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (3)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/median-of-two-sorted-arrays.html/">Median of Two Sorted Arrays</a>
+      </li>
     
       <li class="post">
         <a href="/blog/longest-substring-without-repeating-characters.html/">Longest Substring Without Repeating Characters</a>

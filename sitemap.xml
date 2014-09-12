@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://SesameSeaweed.github.io/blog/median-of-two-sorted-arrays.html/</loc>
+    
+    <lastmod>2014-09-12T15:29:32-04:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://SesameSeaweed.github.io/blog/longest-substring-without-repeating-characters.html/</loc>
     
     <lastmod>2014-09-12T11:06:40-04:00</lastmod>
@@ -29,21 +37,21 @@
   
   <url>
     <loc>http://SesameSeaweed.github.io/blog/archives/</loc>
-    <lastmod>2014-09-12T11:44:37-04:00</lastmod>
+    <lastmod>2014-09-12T15:39:49-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://SesameSeaweed.github.io/</loc>
-    <lastmod>2014-09-12T11:44:37-04:00</lastmod>
+    <lastmod>2014-09-12T15:39:49-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://SesameSeaweed.github.io/aboutme/</loc>
-    <lastmod>2014-09-12T11:44:37-04:00</lastmod>
+    <lastmod>2014-09-12T15:39:49-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
