@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Add Two Numbers - SesameSeaweed&#8217;s Blog</title>
+  <meta name="author" content="SesameSeaweed">
+
+  
+  <meta name="description" content="链表类型最简单的题目了吧。尤其是题目指明了数字是以倒序存储的。
+我觉得这道题的难度在于怎么可以把题目写的简练。对于链表题，要考虑链表本身是不是空。两个链表同时处理就要考虑什么时候哪个链表可能是空的。
+还有一个链表题很需要搞清楚的点就是java里面的对象引用。在初始化时，“=”语句左边的是引用， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://SesameSeaweed.github.io/blog/add-two-numbers.html/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="SesameSeaweed's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">SesameSeaweed&#8217;s Blog</a></h1>
+  
+    <h2>A blogging framework for hackers. YEY !!!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:SesameSeaweed.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/LeetCode">LeetCode</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/aboutme">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Add Two Numbers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-15T15:05:02-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:05 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>链表类型最简单的题目了吧。尤其是题目指明了数字是以倒序存储的。
+我觉得这道题的难度在于怎么可以把题目写的简练。对于链表题，要考虑链表本身是不是空。两个链表同时处理就要考虑什么时候哪个链表可能是空的。
+还有一个链表题很需要搞清楚的点就是java里面的对象引用。在初始化时，“=”语句左边的是引用，右边new出来的是对象。在后面的左右都是引用的“=”语句时，左右的引用同时指向了右边引用所指向的对象。参考了：<a href="http://www.cnblogs.com/focusChen/articles/2497768.html">http://www.cnblogs.com/focusChen/articles/2497768.html</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">addTwoNumbers</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="k">while</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="n">carry</span> <span class="o">%</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">carry</span> <span class="o">=</span> <span class="n">carry</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SesameSeaweed</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-09-15T15:05:02-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:05 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://SesameSeaweed.github.io/blog/add-two-numbers.html/" data-via="" data-counturl="http://SesameSeaweed.github.io/blog/add-two-numbers.html/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/median-of-two-sorted-arrays.html/" title="Previous Post: Median of Two Sorted Arrays">&laquo; Median of Two Sorted Arrays</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (4)</a></li>
+<li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
+
+  </ul>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/add-two-numbers.html/">Add Two Numbers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/median-of-two-sorted-arrays.html/">Median of Two Sorted Arrays</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/longest-substring-without-repeating-characters.html/">Longest Substring Without Repeating Characters</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/two-sum.html/">Two Sum</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/hello-octopress.html/">Hello Octopress</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - SesameSeaweed -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'httpsesameseaweedgithubio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://SesameSeaweed.github.io/blog/add-two-numbers.html/';
+        var disqus_url = 'http://SesameSeaweed.github.io/blog/add-two-numbers.html/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

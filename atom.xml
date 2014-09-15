@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-13T13:12:38-04:00</updated>
+  <updated>2014-09-15T15:17:28-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add Two Numbers]]></title>
+    <link href="http://SesameSeaweed.github.io/blog/add-two-numbers.html/"/>
+    <updated>2014-09-15T15:05:02-04:00</updated>
+    <id>http://SesameSeaweed.github.io/blog/add-two-numbers</id>
+    <content type="html"><![CDATA[<p>链表类型最简单的题目了吧。尤其是题目指明了数字是以倒序存储的。
+我觉得这道题的难度在于怎么可以把题目写的简练。对于链表题，要考虑链表本身是不是空。两个链表同时处理就要考虑什么时候哪个链表可能是空的。
+还有一个链表题很需要搞清楚的点就是java里面的对象引用。在初始化时，“=”语句左边的是引用，右边new出来的是对象。在后面的左右都是引用的“=”语句时，左右的引用同时指向了右边引用所指向的对象。参考了：<a href="http://www.cnblogs.com/focusChen/articles/2497768.html">http://www.cnblogs.com/focusChen/articles/2497768.html</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">addTwoNumbers</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="k">while</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="n">carry</span> <span class="o">%</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">carry</span> <span class="o">=</span> <span class="n">carry</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Median of Two Sorted Arrays]]></title>

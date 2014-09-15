@@ -9,7 +9,9 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="这题在LeetCode上的AC Rate也只有17.5%。也属于corner tests神多的题目。一看到这种题目就头超大&hellip; 因为之前刷leetcode的时候也有做过这题，是看了discussion board上面一个根据找第K小的题目改编来的。舍弃前k个数和后k个数。 &hellip;">
+  <meta name="description" content="链表类型最简单的题目了吧。尤其是题目指明了数字是以倒序存储的。
+我觉得这道题的难度在于怎么可以把题目写的简练。对于链表题，要考虑链表本身是不是空。两个链表同时处理就要考虑什么时候哪个链表可能是空的。
+还有一个链表题很需要搞清楚的点就是java里面的对象引用。在初始化时，“=”语句左边的是引用， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/add-two-numbers.html/">Add Two Numbers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-15T15:05:02-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:05 pm</span></time>
+        
+           | <a href="/blog/add-two-numbers.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/add-two-numbers.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>链表类型最简单的题目了吧。尤其是题目指明了数字是以倒序存储的。
+我觉得这道题的难度在于怎么可以把题目写的简练。对于链表题，要考虑链表本身是不是空。两个链表同时处理就要考虑什么时候哪个链表可能是空的。
+还有一个链表题很需要搞清楚的点就是java里面的对象引用。在初始化时，“=”语句左边的是引用，右边new出来的是对象。在后面的左右都是引用的“=”语句时，左右的引用同时指向了右边引用所指向的对象。参考了：<a href="http://www.cnblogs.com/focusChen/articles/2497768.html">http://www.cnblogs.com/focusChen/articles/2497768.html</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">addTwoNumbers</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">l1</span><span class="o">,</span> <span class="n">ListNode</span> <span class="n">l2</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">carry</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">cur2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="k">while</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur1</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur1</span> <span class="o">=</span> <span class="n">cur1</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">cur2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>                  <span class="n">carry</span> <span class="o">+=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+</span><span class='line'>                  <span class="n">cur2</span> <span class="o">=</span> <span class="n">cur2</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>              <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="n">carry</span> <span class="o">%</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>              <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">carry</span> <span class="o">=</span> <span class="n">carry</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -421,13 +506,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (3)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (4)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/add-two-numbers.html/">Add Two Numbers</a>
+      </li>
     
       <li class="post">
         <a href="/blog/median-of-two-sorted-arrays.html/">Median of Two Sorted Arrays</a>
