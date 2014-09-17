@@ -9,7 +9,9 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of &hellip;">
+  <meta name="description" content="这题写的真是渣死了。。
+其实这题和3Sum变化不大。但是需要注意的是，这题要的是三个数相加的和而不是三数相加减target。
+开始动手写的时候，因为这题和3Sum太相似了，所以想都没想就觉得直接调用twoSum，还死板地用了HashMap，结果就绕不出去了。。。写来写去还写了个O(n3)的解法( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,152 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/three-sum-closest.html/">Three Sum Closest</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-17T14:56:38-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:56 pm</span></time>
+        
+           | <a href="/blog/three-sum-closest.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/three-sum-closest.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这题写的真是渣死了。。
+其实这题和3Sum变化不大。但是需要注意的是，这题要的是三个数相加的和而不是三数相加减target。
+开始动手写的时候，因为这题和3Sum太相似了，所以想都没想就觉得直接调用twoSum，还死板地用了HashMap，结果就绕不出去了。。。写来写去还写了个O(n<sup>3</sup>)的解法(twoSum2)。。。Orz。。。
+还有就是为了处理判断方便，默认所有数的和不可能大于99999999，感觉这个也不好。。算了。。过段时间重做吧。。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">threeSumClosest</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">closet</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">twoSum</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">))</span> <span class="o">&lt;</span> <span class="n">Math</span>
+</span><span class='line'>                  <span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">closet</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">closet</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+</span><span class='line'>                      <span class="o">-</span> <span class="n">twoSum</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">));</span>
+</span><span class='line'>              <span class="n">res</span> <span class="o">=</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">twoSum</span><span class="o">(</span><span class="n">num</span><span class="o">,</span> <span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]),</span> <span class="n">i</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">closet</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">while</span><span class="o">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="o">){</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">closet</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">r</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">closet</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">r</span><span class="o">]);</span>
+</span><span class='line'>              <span class="n">res</span> <span class="o">=</span> <span class="n">num</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">+</span> <span class="n">num</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">num</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">+</span> <span class="n">num</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">){</span>
+</span><span class='line'>              <span class="n">r</span><span class="o">--;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">else</span> <span class="n">l</span><span class="o">++;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">twoSum2</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">closet</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">999999999</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">target</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">table</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+</span><span class='line'>              <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span>
+</span><span class='line'>                  <span class="k">if</span> <span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">closet</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">j</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class='line'>                      <span class="n">closet</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">num</span><span class="o">[</span><span class="n">j</span><span class="o">]);</span>
+</span><span class='line'>                      <span class="n">res</span> <span class="o">=</span> <span class="n">num</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">num</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+</span><span class='line'>                  <span class="o">}</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -618,13 +766,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (5)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (6)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/three-sum-closest.html/">Three Sum Closest</a>
+      </li>
     
       <li class="post">
         <a href="/blog/three-sum.html/">Three Sum</a>
@@ -640,10 +792,6 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     
       <li class="post">
         <a href="/blog/longest-substring-without-repeating-characters.html/">Longest Substring Without Repeating Characters</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/two-sum.html/">Two Sum</a>
       </li>
     
   </ul>
