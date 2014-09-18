@@ -9,9 +9,8 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="这题写的真是渣死了。。
-其实这题和3Sum变化不大。但是需要注意的是，这题要的是三个数相加的和而不是三数相加减target。
-开始动手写的时候，因为这题和3Sum太相似了，所以想都没想就觉得直接调用twoSum，还死板地用了HashMap，结果就绕不出去了。。。写来写去还写了个O(n3)的解法( &hellip;">
+  <meta name="description" content="Given a linked list, swap every two adjacent nodes and return its head.
+https://oj.leetcode.com/problems/swap-nodes-in-pairs/ 据说这道题是链表类型的入门题。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +68,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/swap-nodes-in-pairs.html/">Swap Nodes in Pairs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-17T17:00:18-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:00 pm</span></time>
+        
+           | <a href="/blog/swap-nodes-in-pairs.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/swap-nodes-in-pairs.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Given a linked list, swap every two adjacent nodes and return its head.
+<a href="https://oj.leetcode.com/problems/swap-nodes-in-pairs/">https://oj.leetcode.com/problems/swap-nodes-in-pairs/</a></p>
+
+<p>据说这道题是链表类型的入门题。
+链表题我感觉困难的地方包括：
+1. 空指针的处理
+2. 头指针的处理
+3. 指针之间互相指来指去</p>
+
+<ol>
+<li>首先空指针的处理，就是如果代码中出现了p.next那么就要保证p不是空，出现了p.next.next就要保证p.next不是空。</li>
+<li>头指针的处理，一般是用一个dummy的指针，dummy.next指向head，然后返回的时候只要返回dummy.next</li>
+<li>指来指去，只能说，我也是醉了。。。</li>
+</ol>
+
+
+<p>这种类型的指针题，一般会需要维护几个指针：
+dummy:记录头指针
+pre:指向将要发生变化的node的指针
+t:记录下一round开始node</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">swapPairs</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">ListNode</span> <span class="n">header</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ListNode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">header</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">ListNode</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">header</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">while</span><span class="o">(</span><span class="n">head</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">t</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">pre</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="n">pre</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">head</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">header</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>针对这道题，指针变化的顺序是(假设链表是1->2->3->4)：
+  1. 首先记录下转换后的指针位置:下一round开始的指针；
+  2. 将第二个node连到前一round做好了的位置
+  3. 将第二个node的下一个node连成第一个node
+  4. 将换过来的第二个node，也就是原来的第一个node的下一个设置成下一round开始的node
+  5. 设置变量不变量pre和head的位置</p>
+
+<p>这里还有一个难点就是java里面对象和引用。参考：<a href="http://www.cnblogs.com/focusChen/articles/2497768.html">http://www.cnblogs.com/focusChen/articles/2497768.html</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -766,13 +862,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (6)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (7)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/swap-nodes-in-pairs.html/">Swap Nodes in Pairs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/three-sum-closest.html/">Three Sum Closest</a>
@@ -788,10 +888,6 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     
       <li class="post">
         <a href="/blog/median-of-two-sorted-arrays.html/">Median of Two Sorted Arrays</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/longest-substring-without-repeating-characters.html/">Longest Substring Without Repeating Characters</a>
       </li>
     
   </ul>
