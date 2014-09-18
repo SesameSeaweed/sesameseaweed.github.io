@@ -9,7 +9,8 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists. https &hellip;">
+  <meta name="description" content="Given a sorted linked list, delete all duplicates such that each element appear only once.
+https://oj.leetcode.com/problems/remove-duplicates-from- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/remove-duplicates-from-sorted-list.html/">Remove Duplicates From Sorted List</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-18T14:53:36-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:53 pm</span></time>
+        
+           | <a href="/blog/remove-duplicates-from-sorted-list.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/remove-duplicates-from-sorted-list.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Given a sorted linked list, delete all duplicates such that each element appear only once.
+<a href="https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/">https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list/</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">deleteDuplicates</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>     <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">ListNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">while</span> <span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">ListNode</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="k">while</span> <span class="o">(</span><span class="n">tmp</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">tmp</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">node</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+</span><span class='line'>          <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -953,13 +1022,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (7)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (8)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/remove-duplicates-from-sorted-list.html/">Remove Duplicates From Sorted List</a>
+      </li>
     
       <li class="post">
         <a href="/blog/merge-two-sorted-lists.html/">Merge Two Sorted Lists</a>
@@ -975,10 +1048,6 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     
       <li class="post">
         <a href="/blog/three-sum.html/">Three Sum</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/add-two-numbers.html/">Add Two Numbers</a>
       </li>
     
   </ul>
