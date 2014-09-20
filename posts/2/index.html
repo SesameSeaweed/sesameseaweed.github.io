@@ -9,7 +9,8 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="This is my first blog in Octopress. The biggest problem when I tried to deploy Octopress rake deploy error: failed to push some refs to &lsquo;git@ &hellip;">
+  <meta name="description" content="Given an array of integers, find two numbers such that they add up to a specific target number.
+https://oj.leetcode.com/problems/two-sum/ 排序或者查找的变形。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +74,81 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/two-sum.html/">Two Sum</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-10T15:10:11-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>3:10 pm</span></time>
+        
+           | <a href="/blog/two-sum.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/two-sum.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Given an array of integers, find two numbers such that they add up to a specific target number.
+<a href="https://oj.leetcode.com/problems/two-sum/">https://oj.leetcode.com/problems/two-sum/</a></p>
+
+<p>排序或者查找的变形。题目中指出只有一组正解。利用HashMap，依次扫描。
+对于每一个数 numbers[i]，先判断target - numbers[i] 是否已经在HashMap里面。
+    如果在，就返回map.get(target - numbers[i]) + 1 和 i + 1;
+    如果不在， 把数组中每个数作为Key，对应的下标作为value。</p>
+
+<p>本题关键在于HashMap的设计。要方便查找一个期望值(target - numbers[i])已经被扫描过了，而且希望在O(1)的时间内得到本数的下标。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TwoSum</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;();</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>      <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+</span><span class='line'>      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">if</span> <span class="o">(</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">result</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>              <span class="n">result</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>              <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">numbers</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">i</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/hello-octopress.html/">Hello Octopress</a></h1>
     
     
@@ -125,13 +201,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (9)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (10)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/reverse-integer.html/">Reverse Integer</a>
+      </li>
     
       <li class="post">
         <a href="/blog/implement-strstr.html/">Implement strStr()</a>
@@ -147,10 +227,6 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     
       <li class="post">
         <a href="/blog/swap-nodes-in-pairs.html/">Swap Nodes in Pairs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/three-sum-closest.html/">Three Sum Closest</a>
       </li>
     
   </ul>
