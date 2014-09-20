@@ -9,8 +9,13 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="Given a sorted linked list, delete all duplicates such that each element appear only once.
-https://oj.leetcode.com/problems/remove-duplicates-from- &hellip;">
+  <meta name="description" content="这题忽略了一个情况，当haystack和needle都是“”“”的时候。我一开始是把判断内循环needle的长度放在了循环里面。这样，由于开始比较两个字符是否相等而跳出了内循环，所以就比较不到“”“”的情况。暂时也没有想明白为什么人家一开始就知道不把这个写在内循环里面。 1
+2
+3
+4
+5
+6
+7 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +73,67 @@ https://oj.leetcode.com/problems/remove-duplicates-from- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/implement-strstr.html/">Implement strStr()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-19T21:28:31-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:28 pm</span></time>
+        
+           | <a href="/blog/implement-strstr.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/implement-strstr.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这题忽略了一个情况，当haystack和needle都是“”“”的时候。我一开始是把判断内循环needle的长度放在了循环里面。这样，由于开始比较两个字符是否相等而跳出了内循环，所以就比较不到“”“”的情况。暂时也没有想明白为什么人家一开始就知道不把这个写在内循环里面。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">strStr</span><span class="o">(</span><span class="n">String</span> <span class="n">haystack</span><span class="o">,</span> <span class="n">String</span> <span class="n">needle</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">haystack</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">needle</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">haystack</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">j</span><span class="o">++){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">haystack</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">)</span> <span class="o">!=</span> <span class="n">needle</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="n">haystack</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -967,51 +1033,9 @@ t:记录下一round开始node</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/hello-octopress.html/">Hello Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-10T14:01:34-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:01 pm</span></time>
-        
-           | <a href="/blog/hello-octopress.html/#disqus_thread"
-             data-disqus-identifier="http://SesameSeaweed.github.io/blog/hello-octopress.html/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is my first blog in Octopress.</p>
-
-<p>The biggest problem when I tried to deploy Octopress</p>
-
-<p>rake deploy</p>
-
-<p>error: failed to push some refs to &lsquo;git@github.com:SesameSeaweed/sesameseaweed.github.io.git&rsquo;
-hint: Updates were rejected because the tip of your current branch is behind
-hint: its remote counterpart. Integrate the remote changes (e.g.
-hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
-
-<p>I resolved my issue using this blog:
-<a href="http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/">http://allenyee.me/blog/2013/08/21/what-i-learned-from-hosting-octopress-on-github/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1022,13 +1046,17 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (8)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (9)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/implement-strstr.html/">Implement strStr()</a>
+      </li>
     
       <li class="post">
         <a href="/blog/remove-duplicates-from-sorted-list.html/">Remove Duplicates From Sorted List</a>
@@ -1044,10 +1072,6 @@ hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
     
       <li class="post">
         <a href="/blog/three-sum-closest.html/">Three Sum Closest</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/three-sum.html/">Three Sum</a>
       </li>
     
   </ul>

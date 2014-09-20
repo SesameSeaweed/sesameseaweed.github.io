@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-18T14:56:56-04:00</updated>
+  <updated>2014-09-19T21:32:18-04:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Implement strStr()]]></title>
+    <link href="http://SesameSeaweed.github.io/blog/implement-strstr.html/"/>
+    <updated>2014-09-19T21:28:31-04:00</updated>
+    <id>http://SesameSeaweed.github.io/blog/implement-strstr</id>
+    <content type="html"><![CDATA[<p>这题忽略了一个情况，当haystack和needle都是“”“”的时候。我一开始是把判断内循环needle的长度放在了循环里面。这样，由于开始比较两个字符是否相等而跳出了内循环，所以就比较不到“”“”的情况。暂时也没有想明白为什么人家一开始就知道不把这个写在内循环里面。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">strStr</span><span class="o">(</span><span class="n">String</span> <span class="n">haystack</span><span class="o">,</span> <span class="n">String</span> <span class="n">needle</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">haystack</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">needle</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">haystack</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">j</span><span class="o">++){</span>
+</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">haystack</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">)</span> <span class="o">!=</span> <span class="n">needle</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">))</span> <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">if</span><span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">needle</span><span class="o">.</span><span class="na">length</span><span class="o">())</span> <span class="k">return</span> <span class="n">haystack</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remove Duplicates From Sorted List]]></title>
