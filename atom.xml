@@ -4,7 +4,7 @@
   <title><![CDATA[SesameSeaweed's Blog]]></title>
   <link href="http://SesameSeaweed.github.io/atom.xml" rel="self"/>
   <link href="http://SesameSeaweed.github.io/"/>
-  <updated>2014-09-19T21:38:14-04:00</updated>
+  <updated>2014-12-03T16:08:23-05:00</updated>
   <id>http://SesameSeaweed.github.io/</id>
   <author>
     <name><![CDATA[SesameSeaweed]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Maximum SubArray]]></title>
+    <link href="http://SesameSeaweed.github.io/blog/maximum-subarray.html/"/>
+    <updated>2014-12-03T10:51:18-05:00</updated>
+    <id>http://SesameSeaweed.github.io/blog/maximum-subarray</id>
+    <content type="html"><![CDATA[<p>据说这是一道经典的动态规划的题目。</p>
+
+<p>看到一个解释的很简单又很清楚的做法：
+维护一个值max，值是当前i个已经被扫描到的值的局部最优解。
+当计算第i+1个值的局部最优解的时候， 考虑 如果max是负数，加一个负数，值肯定会变小。那么max的值就是A[i]。如果max是正数，加一下就可以了。
+同时维护一个m，m就是整体最优解。m的大小就是已有的m或者当前局部最优解。</p>
+
+<p>大概想想，感觉这种解法似乎有漏洞。比如，m = Math.Max(m, max)，会不会漏掉 加上当前值的m比原来的m和当前max都大的情况呢？其实不会的。因为max就是包含了当前值的局部最优解，也是唯一的candidate for包含当前值的整体最优解</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span><span class='line'>              <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]):</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class='line'>              <span class="n">m</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">m</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reverse Integer]]></title>

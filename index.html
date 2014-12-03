@@ -9,18 +9,9 @@
   <meta name="author" content="SesameSeaweed">
 
   
-  <meta name="description" content="Reverse digits of an integer.
-https://oj.leetcode.com/problems/reverse-integer/ 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-public class Solution { public int reverse(int x &hellip;">
+  <meta name="description" content="据说这是一道经典的动态规划的题目。 看到一个解释的很简单又很清楚的做法：
+维护一个值max，值是当前i个已经被扫描到的值的局部最优解。
+当计算第i+1个值的局部最优解的时候， 考虑 如果max是负数，加一个负数，值肯定会变小。那么max的值就是A[i]。如果max是正数，加一下就可以了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +69,72 @@ public class Solution { public int reverse(int x &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/maximum-subarray.html/">Maximum SubArray</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-03T10:51:18-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>10:51 am</span></time>
+        
+           | <a href="/blog/maximum-subarray.html/#disqus_thread"
+             data-disqus-identifier="http://SesameSeaweed.github.io/blog/maximum-subarray.html/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>据说这是一道经典的动态规划的题目。</p>
+
+<p>看到一个解释的很简单又很清楚的做法：
+维护一个值max，值是当前i个已经被扫描到的值的局部最优解。
+当计算第i+1个值的局部最优解的时候， 考虑 如果max是负数，加一个负数，值肯定会变小。那么max的值就是A[i]。如果max是正数，加一下就可以了。
+同时维护一个m，m就是整体最优解。m的大小就是已有的m或者当前局部最优解。</p>
+
+<p>大概想想，感觉这种解法似乎有漏洞。比如，m = Math.Max(m, max)，会不会漏掉 加上当前值的m比原来的m和当前max都大的情况呢？其实不会的。因为max就是包含了当前值的局部最优解，也是唯一的candidate for包含当前值的整体最优解</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxSubArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+</span><span class='line'>          <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>  
+</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">A</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+</span><span class='line'>              <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">]):</span> <span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class='line'>              <span class="n">m</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">sum</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">m</span><span class="o">;</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -916,109 +973,6 @@ t:记录下一round开始node</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/longest-substring-without-repeating-characters.html/">Longest Substring Without Repeating Characters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-12T11:06:40-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:06 am</span></time>
-        
-           | <a href="/blog/longest-substring-without-repeating-characters.html/#disqus_thread"
-             data-disqus-identifier="http://SesameSeaweed.github.io/blog/longest-substring-without-repeating-characters.html/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>感觉类似字符数组找最长不重复子序列，字符数组是否有重复字符出现，字符数组删除重复类型题目都是要维护一张表，类似HashTable。</p>
-
-<p>这道题遇到的时候想很多情况。越想越觉得复杂，边角太多。于是大概看了一下别人的思路。网上解法都是维护一张表，但是表的设计各有不同。</p>
-
-<p>我的解法是 维护一张表table，表里记录的是最近一次遇到某个字符的位置。比如，对于字符串“qpxrjxkltzyx”，以x为例。以i作为index遍历。以start表示本轮遍历的开始位置。</p>
-
-<p>遍历思路：
-如果start = 0，这是第一轮遍历，遍历到x前，table[s.charAt(x)] = -1。经过x时，table[s.charAt(x)] = 2。
-然后当i == 5时，因为发现有重复的x，所以要重新开始查找。查找的起点应该是从start = 3开始。同时要记录下这时的最长序列。而这时，table[s.charAt(x)]应该设为5。</p>
-
-<p>算法总结：
-表table记录的是最近一次遇到某字符的位置。如果从未遇到，设为 -1。
-遍历到字母x的时候，判断从这轮的start开始，
-    没有遇到(table[s.charAt(i)] &lt; start) 把当前长度加1，记录下当前位置；
-    遇到 更新start的位置；更新table；判断更新最大值；记录长度；将index回退一步
-我在更新长度的时候有过bug：长度应该已经是(i - start + 1)，因为起点是在start，而index又是从i开始的。</p>
-
-<p>很多细节都没有一下想清楚。
-代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">lengthOfLongestSubstring</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>          <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>          <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>          <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-</span><span class='line'>  
-</span><span class='line'>          <span class="kt">int</span><span class="o">[]</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">256</span><span class="o">];</span>
-</span><span class='line'>          <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">table</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-</span><span class='line'>          <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
-</span><span class='line'>              <span class="k">if</span><span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">&lt;</span> <span class="n">start</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>                  <span class="n">length</span><span class="o">++;</span>
-</span><span class='line'>                  <span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>              <span class="o">}</span>
-</span><span class='line'>              <span class="k">else</span><span class="o">{</span>
-</span><span class='line'>                  <span class="k">if</span><span class="o">(</span><span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">&gt;=</span> <span class="n">start</span> <span class="o">&amp;&amp;</span> <span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">!=</span> <span class="n">i</span><span class="o">){</span>
-</span><span class='line'>                      <span class="n">start</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-</span><span class='line'>                      <span class="n">table</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
-</span><span class='line'>                      <span class="n">max</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">length</span><span class="o">,</span> <span class="n">max</span><span class="o">);</span>
-</span><span class='line'>                      <span class="n">length</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-</span><span class='line'>                      <span class="n">i</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-</span><span class='line'>                  <span class="o">}</span>
-</span><span class='line'>              <span class="o">}</span>
-</span><span class='line'>          <span class="o">}</span>
-</span><span class='line'>          <span class="n">max</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">length</span><span class="o">,</span> <span class="n">max</span><span class="o">);</span>
-</span><span class='line'>          <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
-</span><span class='line'>      <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1032,13 +986,17 @@ t:记录下一round开始node</p>
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (10)</a></li>
+    <li class='category'><a href='/blog/categories/leetcode/'>leetcode (11)</a></li>
 <li class='category'><a href='/blog/categories/tech/'>tech (1)</a></li>
 
   </ul>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/maximum-subarray.html/">Maximum SubArray</a>
+      </li>
     
       <li class="post">
         <a href="/blog/reverse-integer.html/">Reverse Integer</a>
@@ -1054,10 +1012,6 @@ t:记录下一round开始node</p>
     
       <li class="post">
         <a href="/blog/merge-two-sorted-lists.html/">Merge Two Sorted Lists</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/swap-nodes-in-pairs.html/">Swap Nodes in Pairs</a>
       </li>
     
   </ul>
